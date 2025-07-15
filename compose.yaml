@@ -44,7 +44,7 @@ services:
           - main-db
   smtp:
     image: dockage/mailcatcher:0.8.2
-    contain_name: gold_smtp
+    container_name: gold_smtp
     labels:
       tsdproxy.enable: true
       tsdproxy.ephemeral: false
