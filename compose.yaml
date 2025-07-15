@@ -5,6 +5,7 @@ services:
       args:
         IGNITION_VERSION: 8.1.48
     hostname: gw
+    container_name: gold_gw
     ports:
       - 9092:8088
     volumes:
@@ -24,6 +25,7 @@ services:
    #   -r /restore.gwbk
   sqldb:
     image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: gold_sqldb
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=yourStrong(!)Password
@@ -36,7 +38,17 @@ services:
     networks:
       gw-network:
         aliases:
-          - main-db  
+          - main-db
+  smtp:
+    image: dockage/mailcatcher:0.8.2
+    ports:
+      - 1082:1080
+      - 1027:1025
+    networks:
+      gw-network:
+        aliases:
+          - mail-server
+
 networks:
   gw-network:
 volumes:
