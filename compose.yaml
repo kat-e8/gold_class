@@ -45,6 +45,7 @@ services:
   smtp:
     image: dockage/mailcatcher:0.8.2
     container_name: gold_smtp
+    hostname: gold_srv
     labels:
       tsdproxy.enable: true
       tsdproxy.ephemeral: false
